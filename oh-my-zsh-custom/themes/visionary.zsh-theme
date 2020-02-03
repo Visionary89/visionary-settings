@@ -96,9 +96,11 @@ prompt_context() {
 }
 
 # Git: branch/detached head, dirty status
-if [ -f /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.zsh ]; then
-    #. /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.zsh
-    source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
+local git_install_path
+git_install_path=$(git --exec-path)/../../share/git-core
+if [ -f $git_install_path/git-prompt.sh ]; then
+    #. $git_install_path/git-completion.zsh
+    source $git_install_path/git-prompt.sh
     export GIT_PS1_SHOWDIRTYSTATE=1           # '*'=unstaged, '+'=staged
     export GIT_PS1_STATESEPARATOR='!'          # No space between branch and index status
 
